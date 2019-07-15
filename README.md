@@ -1,6 +1,6 @@
 # Simple Analytics Gatsby Plugin
 
-Install with `npm install gatsby-plugin-simple-analytics`
+Install with `npm install gatsby-plugin-simple-analytics`.
 
 ## How to use
 
