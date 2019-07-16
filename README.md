@@ -1,6 +1,12 @@
 # Simple Analytics Gatsby Plugin
 
+Privacy friendly analytics without cookies and needed consent.
+
 Install with `npm install gatsby-plugin-simple-analytics`.
+
+## What does it do
+
+It tracks page views with support for `pushState` navigation. It sends the data to [Simple Analytics](https://simpleanalytics.com) and it will be available in your dashboard. You need to have a paid subscription for it to work.
 
 ## How to use
 
