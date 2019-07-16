@@ -1,7 +1,7 @@
 {
   "name": "gatsby-plugin-simple-analytics",
   "description": "Gatsby plugin to add Simple Analytics onto a site",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Adriaan van Rossum <support@mail.simpleanalytics.io>",
   "bugs": {
     "url": "https://github.com/simpleanalytics/gatsby-plugin/issues"
