@@ -6,11 +6,11 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   const scriptUrl = `https://${domain}/${scriptName}`
 
   setHeadComponents([
-    <script
-      key="plugin-simpleanalytics"
-      src={scriptUrl}
-      async
-      defer
-    />
+    React.createElement('script', {
+      key: 'plugin-simpleanalytics',
+      src: scriptUrl,
+      async: true,
+      defer: true
+    })
   ])
 }

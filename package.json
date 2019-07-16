@@ -22,8 +22,16 @@
     "url": "https://github.com/simpleanalytics/gatsby-plugin.git"
   },
   "scripts": {
+    "build": "babel src --out-dir . --ignore __tests__",
+    "prepublish": "npm run build"
   },
   "engines": {
-    "node": ">=8.0.0"
-  }
+    "node": ">=4.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.5.0",
+    "@babel/core": "^7.5.4",
+    "@babel/preset-env": "^7.5.4"
+  },
+  "dependencies": {}
 }
