@@ -38,7 +38,7 @@ It tracks page views with support for `pushState` navigation. It sends the data 
 
 [Metomic](https://metomic.io/) provides a privacy-by-design API to ethically manage your users' data. It's pretty cool.
 
-If you want to use it with Metomics `data-micropolicy` use this config:
+If you want to use it with Metomic's `data-micropolicy` use this config:
 
 ```js
 plugins: [
