@@ -1,19 +1,18 @@
-const React = require('react');
+const React = require('react')
 
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
-  const domain = pluginOptions.domain || 'cdn.simpleanalytics.io';
-  const scriptName =
-    domain === 'cdn.simpleanalytics.io' ? 'hello.js' : 'app.js';
-  const scriptUrl = `https://${domain}/${scriptName}`;
+  const domain = pluginOptions.domain || 'cdn.simpleanalytics.io'
+  const scriptName = domain === 'cdn.simpleanalytics.io' ? 'hello.js' : 'app.js'
+  const scriptUrl = `https://${domain}/${scriptName}`
 
   const options = {
     src: scriptUrl,
     async: true
-  };
+  }
 
   if (pluginOptions.metomic) {
-    options.type = 'text/x-metomic';
-    options.metomic = pluginOptions.metomic;
+    options.type = 'text/x-metomic'
+    options.metomic = pluginOptions.metomic
   }
 
   setHeadComponents([
@@ -23,8 +22,8 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
         __html: loadScript(domain, options)
       }
     })
-  ]);
-};
+  ])
+}
 
 // this script runs when the page loads, it does the following;
 // 1. Checks the doNotTrack option, and if set then it aborts and does nothing
@@ -57,5 +56,5 @@ const loadScript = (domain, options) => {
     document,
     navigator,
     'script'
-  )`;
-};
+  )`
+}
