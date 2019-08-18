@@ -1,8 +1,17 @@
 const React = require('react')
 
+const defaultDomain = 'cdn.simpleanalytics.io'
+
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
-  const domain = pluginOptions.domain || 'cdn.simpleanalytics.io'
-  const scriptName = domain === 'cdn.simpleanalytics.io' ? 'hello.js' : 'app.js'
+  const domain = pluginOptions.domain || defaultDomain
+  let scriptName
+  if (pluginOptions.events) {
+    scriptName = 'e.js'
+  } else if (domain === defaultDomain) {
+    scriptName = 'hello.js'
+  } else {
+    scriptName = 'app.js'
+  }
   const scriptUrl = `https://${domain}/${scriptName}`
 
   const options = {
@@ -13,6 +22,9 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   if (pluginOptions.metomic) {
     options.type = 'text/x-metomic'
     options.metomic = pluginOptions.metomic
+  }
+  if (pluginOptions.events) {
+    options.eventsGlobal = pluginOptions.eventsGlobal
   }
 
   setHeadComponents([
@@ -42,6 +54,11 @@ const loadScript = (domain, options) => {
     ${
       options.metomic
         ? `l.setAttribute("data-micropolicy","${options.metomic}")`
+        : ''
+    }
+    ${
+      options.eventsGlobal
+        ? `l.setAttribute("data-sa-global", "${options.eventsGlobal}")`
         : ''
     }
     e = i.getElementsByTagName(p)[0];
