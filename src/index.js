@@ -1,19 +1,36 @@
 let eventGlobal
 const env = process.env.NODE_ENV
 
-export default function(event) {
+let eventBuffer = []
+// due to the async nature of SA script, the first events
+// can be sent before the script has loaded, so we buffer
+// them here and then send them when the script has loaded
+const onLoad = function() {
+  let event
+  while ((event = eventBuffer.pop())) {
+    trackEvent(event)
+  }
+}
+
+const trackEvent = function(event) {
   if (!eventGlobal) {
-    const script = document.querySelector('[data-sa-global]')
-    eventGlobal = script ? script.getAttribute('data-sa-global') : 'sa'
+    const script = document.querySelector('#simple-analytics')
+    eventGlobal = script.getAttribute('data-sa-global') || 'sa'
+    if (!script.onLoad) {
+      script.onLoad = onLoad
+    }
     debug(`Simple Analytics: Using global variable [${eventGlobal}] for events`)
   }
   if (window[eventGlobal]) {
-    debug('Simple Analytics: Tracking event')
-    return window[eventGlobal](event)
+    if (!debug(`Simple Analytics: Tracking event ${event}`)) {
+      return window[eventGlobal](event)
+    }
   }
-  return debug('Simple Analytics: Events script is not loaded')
+  eventBuffer = [...eventBuffer, event] // buffer this event
 }
 
 export function debug(msg) {
   return env !== 'production' ? console.debug(msg) : null
 }
+
+export default trackEvent

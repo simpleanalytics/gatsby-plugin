@@ -4,8 +4,10 @@ exports.onRouteUpdate = ({ location }, pluginOptions) => {
   if (pluginOptions.trackPageViews) {
     const ignore = pluginOptions.ignorePages || []
     const { pathname } = location
-    if (!ignore.includes(pathname)) {
-      sa(pathname)
+    const page = pathname.replace(/\//g, '') || 'home'
+    if (!ignore.includes(page)) {
+      const event = `view-${page}`
+      sa(event)
     }
   }
 }

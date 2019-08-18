@@ -5,9 +5,7 @@ const defaultDomain = 'cdn.simpleanalytics.io'
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   const domain = pluginOptions.domain || defaultDomain
   let scriptName
-  if (pluginOptions.events) {
-    scriptName = 'e.js'
-  } else if (domain === defaultDomain) {
+  if (domain === defaultDomain) {
     scriptName = 'hello.js'
   } else {
     scriptName = 'app.js'
@@ -51,6 +49,7 @@ const loadScript = (domain, options) => {
     l = i.createElement(p);
     l.src="${options.src}";
     l.type="${options.type}";
+    l.setAttribute('id', 'simple-analytics');
     ${
       options.metomic
         ? `l.setAttribute("data-micropolicy","${options.metomic}")`
