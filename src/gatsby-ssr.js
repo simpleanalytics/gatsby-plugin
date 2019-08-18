@@ -32,13 +32,8 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 // 4. Inserts the script tag before the first other script in the document
 const loadScript = (domain, options) => {
   return `!(function(s, i, m, p, l, e) {
-    if (
-      s.doNotTrack == "1" ||
-      m.doNotTrack == "yes" ||
-      m.doNotTrack == "1" ||
-      m.msDoNotTrack == "1" ||
-      (s.external.msTrackingProtectionEnabled && s.external.msTrackingProtectionEnabled())
-    ) {
+    const dnt = s.doNotTrack || m.doNotTrack || m.msDoNotTrack;
+    if (/yes|1/.test(dnt)) {
       return console.warn('Simple Analytics: Not loading script when doNotTrack is enabled');
     }
     l = i.createElement(p);
