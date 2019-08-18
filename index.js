@@ -34,7 +34,7 @@ var trackEvent = function trackEvent(event) {
     eventGlobal = script.getAttribute('data-sa-global') || 'sa';
 
     if (!script.onLoad) {
-      script.onLoad = onLoad;
+      script.onload = onLoad;
     }
 
     debug(`Simple Analytics: Using global variable [${eventGlobal}] for events`);
@@ -44,10 +44,9 @@ var trackEvent = function trackEvent(event) {
     if (!debug(`Simple Analytics: Tracking event ${event}`)) {
       return window[eventGlobal](event);
     }
-  } // buffer this event
+  }
 
-
-  eventBuffer = [].concat(_toConsumableArray(eventBuffer), [event]);
+  eventBuffer = [].concat(_toConsumableArray(eventBuffer), [event]); // buffer this event
 };
 
 function debug(msg) {
