@@ -17,7 +17,7 @@ const trackEvent = function(event) {
     const script = document.querySelector('#simple-analytics')
     eventGlobal = script.getAttribute('data-sa-global') || 'sa'
     if (!script.onLoad) {
-      script.onLoad = onLoad
+      script.onload = onLoad
     }
     debug(`Simple Analytics: Using global variable [${eventGlobal}] for events`)
   }
