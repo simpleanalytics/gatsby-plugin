@@ -31,10 +31,13 @@ var onLoad = function onLoad() {
 var trackEvent = function trackEvent(event) {
   if (!eventGlobal) {
     var script = document.querySelector('#simple-analytics');
+    if (!script) return;
     eventGlobal = script.getAttribute('data-sa-global') || 'sa';
 
-    if (!script.onLoad) {
-      script.onload = onLoad;
+    if (!script.getAttribute('data-loaded')) {
+      script.addEventListener('load', onLoad);
+    } else {
+      onLoad();
     }
 
     debug(`Simple Analytics: Using global variable [${eventGlobal}] for events`);
