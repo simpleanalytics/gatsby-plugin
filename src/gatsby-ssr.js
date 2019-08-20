@@ -5,7 +5,9 @@ const defaultDomain = 'cdn.simpleanalytics.io'
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   const domain = pluginOptions.domain || defaultDomain
   let scriptName
-  if (domain === defaultDomain) {
+  if (pluginOptions.scriptName) {
+    scriptName = pluginOptions.scriptName
+  } else if (domain === defaultDomain) {
     scriptName = 'hello.js'
   } else {
     scriptName = 'app.js'
@@ -14,11 +16,12 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 
   const options = {
     src: scriptUrl,
-    async: true
+    async: true,
+    type: 'text/javascript'
   }
 
   if (pluginOptions.metomic) {
-    options.type = 'text/x-metomic'
+    // options.type = 'text/x-metomic'
     options.metomic = pluginOptions.metomic
   }
   if (pluginOptions.events) {
@@ -28,6 +31,8 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   setHeadComponents([
     React.createElement('script', {
       key: 'plugin-simpleanalytics',
+      type: options.metomic ? 'text/x-metomic' : 'text/javascript',
+      ['data-micropolicy']: '${options.metomic}',
       dangerouslySetInnerHTML: {
         __html: loadScript(domain, options)
       }
@@ -47,14 +52,14 @@ const loadScript = (domain, options) => {
       return console.warn('Simple Analytics: Not loading script when doNotTrack is enabled');
     }
     l = i.createElement(p);
+    l.setAttribute('data-loaded', false);
+    l.addEventListener('load', function() {
+      l.setAttribute('data-loaded', true);
+    }, false)
+    l.async = "true";
     l.src="${options.src}";
-    l.type="${options.type}";
+    l.type="text/javascript";
     l.setAttribute('id', 'simple-analytics');
-    ${
-      options.metomic
-        ? `l.setAttribute("data-micropolicy","${options.metomic}")`
-        : ''
-    }
     ${
       options.eventsGlobal
         ? `l.setAttribute("data-sa-global", "${options.eventsGlobal}")`
