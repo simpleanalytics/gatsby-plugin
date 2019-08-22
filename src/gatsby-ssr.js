@@ -24,15 +24,19 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
     // options.type = 'text/x-metomic'
     options.metomic = pluginOptions.metomic
   }
-  if (pluginOptions.events) {
+  if (pluginOptions.trackEvents) {
     options.eventsGlobal = pluginOptions.eventsGlobal
   }
 
   setHeadComponents([
     React.createElement('script', {
+      id: 'simple-analytics-loader',
       key: 'plugin-simpleanalytics',
+      // type: 'text/javascript',
       type: options.metomic ? 'text/x-metomic' : 'text/javascript',
-      ['data-micropolicy']: '${options.metomic}',
+      ['data-micropolicy']: options.metomic,
+      ['data-sa-global']: options.eventsGlobal,
+      ['data-loaded']: false,
       dangerouslySetInnerHTML: {
         __html: loadScript(domain, options)
       }
@@ -47,14 +51,16 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 // 4. Inserts the script tag before the first other script in the document
 const loadScript = (domain, options) => {
   return `!(function(s, i, m, p, l, e) {
+    const parent = document.querySelector('#simple-analytics-loader');
     const dnt = s.doNotTrack || m.doNotTrack || m.msDoNotTrack;
     if (/yes|1/.test(dnt)) {
+      parent.setAttribute('data-enabled', false);
       return console.warn('Simple Analytics: Not loading script when doNotTrack is enabled');
     }
     l = i.createElement(p);
-    l.setAttribute('data-loaded', false);
     l.addEventListener('load', function() {
-      l.setAttribute('data-loaded', true);
+      parent.setAttribute('data-loaded', true);
+      parent.dispatchEvent('script-loaded');
     }, false)
     l.async = "true";
     l.src="${options.src}";

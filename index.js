@@ -30,16 +30,17 @@ var onLoad = function onLoad() {
 
 var trackEvent = function trackEvent(event) {
   if (!eventGlobal) {
-    var script = document.querySelector('#simple-analytics');
-    if (!script) return;
-    eventGlobal = script.getAttribute('data-sa-global') || 'sa';
+    // this will always be in the page, and we use it to
+    // tell if SA has loaded yet
+    var script = document.querySelector('#simple-analytics-loader');
 
-    if (!script.getAttribute('data-loaded')) {
-      script.addEventListener('load', onLoad);
-    } else {
+    if (!isLoaded(script)) {
+      script.addEventListener('script-loaded', onLoad);
+    } else if (isEnabled(script)) {
       onLoad();
     }
 
+    eventGlobal = getGlobal(script);
     debug(`Simple Analytics: Using global variable [${eventGlobal}] for events`);
   }
 
@@ -58,3 +59,15 @@ function debug(msg) {
 
 var _default = trackEvent;
 exports.default = _default;
+
+function isEnabled(script) {
+  return script.getAttribute('data-enabled');
+}
+
+function isLoaded(script) {
+  return script.getAttribute('data-loaded');
+}
+
+function getGlobal(script) {
+  return script.getAttribute('data-sa-global') || 'sa';
+}
