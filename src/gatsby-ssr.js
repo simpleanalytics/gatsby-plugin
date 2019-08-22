@@ -1,23 +1,42 @@
 const React = require('react')
 
+const defaultDomain = 'cdn.simpleanalytics.io'
+
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
-  const domain = pluginOptions.domain || 'cdn.simpleanalytics.io'
-  const scriptName = domain === 'cdn.simpleanalytics.io' ? 'hello.js' : 'app.js'
+  const domain = pluginOptions.domain || defaultDomain
+  let scriptName
+  if (pluginOptions.scriptName) {
+    scriptName = pluginOptions.scriptName
+  } else if (domain === defaultDomain) {
+    scriptName = 'hello.js'
+  } else {
+    scriptName = 'app.js'
+  }
   const scriptUrl = `https://${domain}/${scriptName}`
 
   const options = {
     src: scriptUrl,
-    async: true
+    async: true,
+    type: 'text/javascript'
   }
 
   if (pluginOptions.metomic) {
-    options.type = 'text/x-metomic'
+    // options.type = 'text/x-metomic'
     options.metomic = pluginOptions.metomic
+  }
+  if (pluginOptions.trackEvents) {
+    options.eventsGlobal = pluginOptions.eventsGlobal
   }
 
   setHeadComponents([
     React.createElement('script', {
+      id: 'simple-analytics-loader',
       key: 'plugin-simpleanalytics',
+      // type: 'text/javascript',
+      type: options.metomic ? 'text/x-metomic' : 'text/javascript',
+      ['data-micropolicy']: options.metomic,
+      ['data-sa-global']: options.eventsGlobal,
+      ['data-loaded']: false,
       dangerouslySetInnerHTML: {
         __html: loadScript(domain, options)
       }
@@ -32,16 +51,24 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 // 4. Inserts the script tag before the first other script in the document
 const loadScript = (domain, options) => {
   return `!(function(s, i, m, p, l, e) {
+    const parent = document.querySelector('#simple-analytics-loader');
     const dnt = s.doNotTrack || m.doNotTrack || m.msDoNotTrack;
     if (/yes|1/.test(dnt)) {
+      parent.setAttribute('data-enabled', false);
       return console.warn('Simple Analytics: Not loading script when doNotTrack is enabled');
     }
     l = i.createElement(p);
+    l.addEventListener('load', function() {
+      parent.setAttribute('data-loaded', true);
+      parent.dispatchEvent('script-loaded');
+    }, false)
+    l.async = "true";
     l.src="${options.src}";
-    l.type="${options.type}";
+    l.type="text/javascript";
+    l.setAttribute('id', 'simple-analytics');
     ${
-      options.metomic
-        ? `l.setAttribute("data-micropolicy","${options.metomic}")`
+      options.eventsGlobal
+        ? `l.setAttribute("data-sa-global", "${options.eventsGlobal}")`
         : ''
     }
     e = i.getElementsByTagName(p)[0];
