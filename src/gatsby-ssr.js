@@ -60,7 +60,14 @@ const loadScript = (domain, options) => {
     l = i.createElement(p);
     l.addEventListener('load', function() {
       parent.setAttribute('data-loaded', true);
-      parent.dispatchEvent('script-loaded');
+      let event;
+      if (typeof Event === 'function') {
+        event = new Event('script-loaded');
+      } else {
+        event = document.createEvent('Event');
+        event.initEvent('script-loaded', true, true);
+      }
+      parent.dispatchEvent(event);
     }, false)
     l.async = "true";
     l.src="${options.src}";
