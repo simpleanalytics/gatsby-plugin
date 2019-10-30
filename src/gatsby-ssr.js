@@ -52,6 +52,7 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
 const loadScript = (domain, options) => {
   return `!(function(s, i, m, p, l, e) {
     const parent = document.querySelector('#simple-analytics-loader');
+    if (!parent) return;
     const dnt = s.doNotTrack || m.doNotTrack || m.msDoNotTrack;
     if (/yes|1/.test(dnt)) {
       parent.setAttribute('data-enabled', false);
