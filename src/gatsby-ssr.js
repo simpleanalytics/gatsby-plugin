@@ -7,6 +7,8 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   let scriptName
   if (pluginOptions.scriptName) {
     scriptName = pluginOptions.scriptName
+  } else if (pluginOptions.trackEvents) {
+    scriptName = 'e.js'
   } else if (domain === defaultDomain) {
     scriptName = 'hello.js'
   } else {
