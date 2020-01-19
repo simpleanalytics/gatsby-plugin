@@ -1,8 +1,14 @@
 # Simple Analytics Gatsby Plugin
 
-Privacy friendly analytics without cookies and needed consent.
+[Simple Analytics](https://simpleanalytics.com) is a clean, simple, and privacy friendly analytics tool. Actionable data in a beautiful dashboard. It does [not use cookies](https://docs.simpleanalytics.com/what-we-collect) and you can [bypass ad blockers](https://docs.simpleanalytics.com/bypass-ad-blockers). Make sure [to signup](https://simpleanalytics.com) to get most value out of this plugin.
 
-Install with `npm install gatsby-plugin-simple-analytics --save-dev`.
+## Install
+
+Run the following command:
+
+```bash
+npm install gatsby-plugin-simple-analytics --save-dev
+```
 
 ## What does it do
 
