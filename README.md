@@ -52,7 +52,7 @@ plugins: [
 It will result in something like this:
 
 ```html
-<script src="https://cdn.simpleanalytics.io/hello.js" async="" defer="" type="text/x-metomic" data-micropolicy="POLICY-SLUG">
+<script src="https://scripts.simpleanalyticscdn.com/latest.js" async="" defer="" type="text/x-metomic" data-micropolicy="POLICY-SLUG">
 ```
 
 ## Contribute
