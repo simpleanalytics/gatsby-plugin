@@ -12,27 +12,25 @@ It tracks page views with support for `pushState` navigation. It sends the data 
 
 1. Add our plugin to `gatsby-config.js`
 
-    ```js
-    plugins: [
-      'gatsby-plugin-simple-analytics'
-    ]
-    ```
+   ```js
+   plugins: ['gatsby-plugin-simple-analytics']
+   ```
 
 1. If you want to set a custom domain, use this config:
 
-    ```js
-    plugins: [
-      {
-        resolve: 'gatsby-plugin-simple-analytics',
-        options: {
-          // Optional custom domain
-          domain: 'your.custom.domain'
-        }
-      }
-    ]
-    ```
+   ```js
+   plugins: [
+     {
+       resolve: 'gatsby-plugin-simple-analytics',
+       options: {
+         // Optional custom domain
+         domain: 'your.custom.domain'
+       }
+     }
+   ]
+   ```
 
-    [Read our docs](https://docs.simpleanalytics.com/bypass-ad-blockers) on the custom domain feature.
+   [Read our docs](https://docs.simpleanalytics.com/bypass-ad-blockers) on the custom domain feature.
 
 ## Use with Metomic
 
