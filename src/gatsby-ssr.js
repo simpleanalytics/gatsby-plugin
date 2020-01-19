@@ -1,16 +1,14 @@
 const React = require('react')
 
-const defaultDomain = 'cdn.simpleanalytics.io'
+const defaultDomain = 'scripts.simpleanalyticscdn.com'
 
 exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   const domain = pluginOptions.domain || defaultDomain
   let scriptName
   if (pluginOptions.scriptName) {
     scriptName = pluginOptions.scriptName
-  } else if (pluginOptions.trackEvents) {
-    scriptName = 'e.js'
   } else if (domain === defaultDomain) {
-    scriptName = 'hello.js'
+    scriptName = 'latest.js'
   } else {
     scriptName = 'app.js'
   }
