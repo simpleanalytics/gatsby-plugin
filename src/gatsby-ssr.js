@@ -7,10 +7,8 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   let scriptName
   if (pluginOptions.scriptName) {
     scriptName = pluginOptions.scriptName
-  } else if (domain === defaultDomain) {
-    scriptName = 'latest.js'
   } else {
-    scriptName = 'app.js'
+    scriptName = 'latest.js'
   }
   const scriptUrl = `https://${domain}/${scriptName}`
 
@@ -21,7 +19,6 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
   }
 
   if (pluginOptions.metomic) {
-    // options.type = 'text/x-metomic'
     options.metomic = pluginOptions.metomic
   }
   if (pluginOptions.trackEvents) {
@@ -32,7 +29,6 @@ exports.onRenderBody = ({ setHeadComponents }, pluginOptions) => {
     React.createElement('script', {
       id: 'simple-analytics-loader',
       key: 'plugin-simpleanalytics',
-      // type: 'text/javascript',
       type: options.metomic ? 'text/x-metomic' : 'text/javascript',
       ['data-micropolicy']: options.metomic,
       ['data-sa-global']: options.eventsGlobal,
