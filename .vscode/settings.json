@@ -1,10 +1,12 @@
 {
-  "spellright.language": [
-    "en"
-  ],
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "spellright.language": ["en", "nl"],
   "spellright.documentTypes": [
     "markdown",
     "latex",
-    "plaintext"
+    "plaintext",
+    "html",
+    "handlebars"
   ]
 }
