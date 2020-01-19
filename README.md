@@ -2,7 +2,7 @@
 
 Privacy friendly analytics without cookies and needed consent.
 
-Install with `npm install gatsby-plugin-simple-analytics`.
+Install with `npm install gatsby-plugin-simple-analytics --save-dev`.
 
 ## What does it do
 
