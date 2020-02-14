@@ -19,21 +19,30 @@ It tracks page views with support for `pushState` navigation. It sends the data 
 1. Add our plugin to `gatsby-config.js`
 
    ```js
-   plugins: ['gatsby-plugin-simple-analytics']
+   plugins: [    
+      {
+        resolve: 'simple-analytics-gatsby-plugin',
+        options: {
+          trackPageViews: true
+        }
+      }
+    ]
    ```
 
 1. If you want to set a custom domain, use this config:
 
    ```js
-   plugins: [
-     {
-       resolve: 'gatsby-plugin-simple-analytics',
-       options: {
-         // Optional custom domain
-         domain: 'your.custom.domain'
-       }
-     }
-   ]
+    plugins: [    
+      {
+        resolve: 'simple-analytics-gatsby-plugin',
+        options: {
+          eventsGlobal: 'sa',
+          events: true,
+          trackPageViews: true,
+          ignorePages: ['pathname']
+        }
+      }
+    ]
    ```
 
    [Read our docs](https://docs.simpleanalytics.com/bypass-ad-blockers) on the custom domain feature.
