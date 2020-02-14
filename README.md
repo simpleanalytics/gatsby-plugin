@@ -20,13 +20,13 @@ It tracks page views with support for `pushState` navigation. It sends the data 
 
    ```js
    plugins: [    
-      {
-        resolve: 'simple-analytics-gatsby-plugin',
-        options: {
-          trackPageViews: true
-        }
-      }
-    ]
+     {
+       resolve: 'simple-analytics-gatsby-plugin',
+       options: {
+         trackPageViews: true
+       }
+     }
+   ]
    ```
 
 1. If you want to set a custom domain, use this config:
