@@ -1,4 +1,8 @@
-# Simple Analytics Gatsby Plugin
+<a href="https://simpleanalytics.com/?ref=github.com/simpleanalytics/gatsby-plugin">
+  <img src="https://assets.simpleanalytics.com/images/logos/logo-github-readme.png" alt="Simple Analytics logo" align="right" height="62" />
+</a>
+
+# Gatsby Plugin
 
 [Simple Analytics](https://simpleanalytics.com) is a clean, simple, and privacy friendly analytics tool. Actionable data in a beautiful dashboard. It does [not use cookies](https://docs.simpleanalytics.com/what-we-collect) and you can [bypass ad blockers](https://docs.simpleanalytics.com/bypass-ad-blockers). Make sure [to signup](https://simpleanalytics.com) to get most value out of this plugin.
 
