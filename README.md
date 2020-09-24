@@ -25,7 +25,7 @@ It tracks page views with support for `pushState` navigation. It sends the data 
    ```js
    plugins: [    
      {
-       resolve: 'simple-analytics-gatsby-plugin',
+       resolve: 'gatsby-plugin-simple-analytics',
        options: {
          trackPageViews: true
        }
@@ -38,7 +38,7 @@ It tracks page views with support for `pushState` navigation. It sends the data 
    ```js
     plugins: [    
       {
-        resolve: 'simple-analytics-gatsby-plugin',
+        resolve: 'gatsby-plugin-simple-analytics',
         options: {
           eventsGlobal: 'sa',
           events: true,
