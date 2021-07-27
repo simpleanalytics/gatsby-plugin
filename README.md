@@ -40,6 +40,7 @@ It tracks page views with support for `pushState` navigation. It sends the data 
       {
         resolve: 'gatsby-plugin-simple-analytics',
         options: {
+          domain: 'custom.example.com',
           eventsGlobal: 'sa',
           events: true,
           trackPageViews: true,
